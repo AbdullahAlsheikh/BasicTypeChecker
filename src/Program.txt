@@ -4,6 +4,11 @@ public class MyFirstJavaProgram {
 	String b = "hay whats up";
 	char c = 'g';
 	int d = 123;
+	double = a;
+	float = 1.23124
+	short = 12311111111; 
+	byte = 1272;
+	long = 1232a;
 
    }
 }

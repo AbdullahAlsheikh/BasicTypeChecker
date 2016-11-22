@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.*;
 
-public class main {
+public class TypeChecker {
 
-	private static String[] varableType = { "boolean", "char", "int", "float",
+	private static String[] variableType = { "boolean", "char", "int", "float",
 											"double", "short", "String", "byte"};
 	private static List<String> mainFunction = new ArrayList<String>();
 
@@ -25,36 +25,56 @@ public class main {
 				.println("\nis there only a single main with the correct declations: "
 						+ checkMainCount(code));
 		
-		
 		//Checking boolean variables
-		System.out.println("\nChecking Boolean Varables");
-		System.out.println("Do boolean varables have the right assignment: "  + checkBooleanVar(mainFunction));
+		System.out.println("\nChecking Boolean variables");
+		System.out.println("Do boolean variables have the right assignment: "  + checkBooleanVar(mainFunction));
 		
 		//Checking String variables
-		System.out.println("\nChecking String Varables");
-		System.out.println("Do String varables have the right assignment: " + checkStringVar(mainFunction));
+		System.out.println("\nChecking String variables");
+		System.out.println("Do String variables have the right assignment: " + checkStringVar(mainFunction));
 		
 		//Checking String variables
-		System.out.println("\nChecking char Varables");
-		System.out.println("Do char varables have the right assignment: " + checkCharVar(mainFunction));
+		System.out.println("\nChecking char variables");
+		System.out.println("Do char variables have the right assignment: " + checkCharVar(mainFunction));
 
 		//Checking String variables
-		System.out.println("\nChecking int Varables");
-		System.out.println("Do int varables have the right assignment: " + checkIntVar(mainFunction));
+		System.out.println("\nChecking int variables");
+		System.out.println("Do int variables have the right assignment: " + checkIntVar(mainFunction));
+		
+		//TODO more data types
+		//Checking double variables
+		System.out.println("\nChecking double variables");
+		System.out.println("Do double variables have the right assignment: " + checkDoubleVar(mainFunction));
+
+		//Checking float variables
+		System.out.println("\nChecking float variables");
+		System.out.println("Do float variables have the right assignment: " + checkFloatVar(mainFunction));
+		
+		//Checking short variables
+		System.out.println("\nChecking short variables");
+		System.out.println("Do short variables have the right assignment: " + checkShortVar(mainFunction));
+		
+		//Checking byte variables
+		System.out.println("\nChecking float variables");
+		System.out.println("Do byte variables have the right assignment: " + checkByteVar(mainFunction));
+		
+		//Checking byte variables
+		System.out.println("\nChecking long variables");
+		System.out.println("Do long variables have the right assignment: " + checkLongVar(mainFunction));
 
 
 	}
 	
 	private static boolean checkIntVar(List<String> code){
-		List<String> varable = new ArrayList<String>();
+		List<String> variable = new ArrayList<String>();
 		boolean noError = true;
 		for(String line : code){
 			if(line.startsWith("int")){
-				varable.add(line);
+				variable.add(line);
 			}
 		}
 		
-		for(String intger : varable){
+		for(String intger : variable){
 			int indexOfEqual = intger.indexOf("=");
 			String result = intger.substring(indexOfEqual+ 1, intger.length());
 			result = result.replace(";", "");			
@@ -67,19 +87,19 @@ public class main {
 			
 		}
 		
-		return false;
+		return noError;
 	}
 	
 	private static boolean checkCharVar(List<String> code){
-		List<String> varable = new ArrayList<String>();
+		List<String> variable = new ArrayList<String>();
 		boolean noError = true;
 		for(String line : code){
 			if(line.startsWith("char")){
-				varable.add(line);
+				variable.add(line);
 			}
 		}
 		
-		for(String qchar : varable){
+		for(String qchar : variable){
 			int indexOfEqual = qchar.indexOf("=");
 			String result = qchar.substring(indexOfEqual+ 1, qchar.length());
 			result = result.replace(";", "");
@@ -94,23 +114,17 @@ public class main {
 		return noError;
 	}
 	
-	/**
-	 * 
-	 * @param code
-	 * @return
-	 */
-	
 	private static boolean checkStringVar(List<String> code){
-		List<String> varable = new ArrayList<String>();
+		List<String> variable = new ArrayList<String>();
 		boolean noError = true;
 		for(String line : code){
 			if(line.startsWith("String")){
-				varable.add(line);
+				variable.add(line);
 			}
 		}
 		
 		
-		for(String string : varable){
+		for(String string : variable){
 			int indexOfEqual = string.indexOf("=");
 			String result = string.substring(indexOfEqual+ 1, string.length());
 			result = result.replace(";", "");
@@ -123,21 +137,16 @@ public class main {
 		return noError;
 	}
 	
-	/**
-	 * 
-	 * @param code
-	 * @return
-	 */
 	private static boolean checkBooleanVar(List<String> code){
-		List<String> varable = new ArrayList<String>();
+		List<String> variable = new ArrayList<String>();
 		boolean noError = true;
 		for(String line : code){
 			if(line.startsWith("boolean")){
-				varable.add(line);
+				variable.add(line);
 			}
 		}
 		
-		for(String bool : varable){
+		for(String bool : variable){
 			int indexOfEqual = bool.indexOf("=");
 			String result = bool.substring(indexOfEqual+ 1, bool.length());
 			result = result.replace(";", "");
@@ -151,6 +160,124 @@ public class main {
 		
 		return noError;
 	}
+	
+	private static boolean checkFloatVar(List<String> code) { 
+		List<String> variable = new ArrayList<String>();
+		boolean noError = true;
+		for(String line : code){
+			if(line.startsWith("float")){
+				variable.add(line);
+			}
+		}
+		
+		for (String floatvar : variable) { 
+			int indexOfEqual = floatvar.indexOf("=");
+			String result = floatvar.substring(indexOfEqual+ 1, floatvar.length());// right-side assignment
+			result = result.replace(";", "");//removes semi-colon
+			try { 
+				float check = Float.parseFloat(result.trim());
+			} catch (Exception e) { 
+				System.out.println("--::Error --> " + floatvar);
+				noError = false;
+			}
+		}
+		return noError;
+	}
+	
+	private static boolean checkDoubleVar(List<String> code) { 
+		List<String> variable = new ArrayList<String>();
+		boolean noError = true;
+		for(String line : code){
+			if(line.startsWith("double")){
+				variable.add(line);
+			}
+		}
+		
+		for (String doublevar : variable) { 
+			int indexOfEqual = doublevar.indexOf("=");
+			String result = doublevar.substring(indexOfEqual+ 1, doublevar.length());
+			result = result.replace(";", "");
+			try { 
+				double check = Double.parseDouble(result.trim());
+			} catch (Exception e) { 
+				System.out.println("--::Error --> " + doublevar);
+				noError = false;
+			}
+		}
+		return noError;
+	}
+	
+	private static boolean checkShortVar(List<String> code) { 
+		List<String> variable = new ArrayList<String>();
+		boolean noError = true;
+		for(String line : code){
+			if(line.startsWith("short")){
+				variable.add(line);
+			}
+		}
+		
+		for (String shortvar : variable) { 
+			int indexOfEqual = shortvar.indexOf("=");
+			String result = shortvar.substring(indexOfEqual+ 1, shortvar.length());// right-side assignment
+			result = result.replace(";", "");//removes semi-colon
+			try { 
+				short check = Short.parseShort(result.trim());
+			} catch (Exception e) { 
+				System.out.println("--::Error --> " + shortvar);
+				noError = false;
+			}
+		}
+		return noError;
+	}
+	
+	private static boolean checkByteVar(List<String> code) { 
+		List<String> variable = new ArrayList<String>();
+		boolean noError = true;
+		for(String line : code){
+			if(line.startsWith("byte")){
+				variable.add(line);
+			}
+		}
+		
+		for (String bytevar : variable) { 
+			int indexOfEqual = bytevar.indexOf("=");
+			String result = bytevar.substring(indexOfEqual+ 1, bytevar.length());// right-side assignment
+			result = result.replace(";", "");//removes semi-colon
+			try { 
+				byte check = Byte.parseByte(result.trim());
+			} catch (Exception e) { 
+				System.out.println("--::Error --> " + bytevar);
+				noError = false;
+			}
+		}
+		return noError;
+	}
+	
+	private static boolean checkLongVar(List<String> code) { 
+		List<String> variable = new ArrayList<String>();
+		boolean noError = true;
+		for(String line : code){
+			if(line.startsWith("long")){
+				variable.add(line);
+			}
+		}
+		
+		for (String longvar : variable) { 
+			int indexOfEqual = longvar.indexOf("=");
+			String result = longvar.substring(indexOfEqual+ 1, longvar.length());// right-side assignment
+			result = result.replace(";", "");//removes semi-colon
+			try { 
+				long check = Long.parseLong(result.trim());
+			} catch (Exception e) { 
+				System.out.println("--::Error --> " + longvar);
+				noError = false;
+			}
+		}
+		return noError;
+	}
+	
+	
+	
 
 	private static boolean checkMainCount(ArrayList<String> code) {
 		
