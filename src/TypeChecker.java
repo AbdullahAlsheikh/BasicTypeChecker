@@ -6,6 +6,7 @@ public class TypeChecker {
 	private static String[] variableType = { "boolean", "char", "int", "float",
 											"double", "short", "String", "byte"};
 	private static List<String> mainFunction = new ArrayList<String>();
+	private static List<String> varableNames = new ArrayList<String>();
 
 	public static void main(String[] args) {
 		ArrayList<String> code = new ArrayList<String>();
@@ -14,16 +15,20 @@ public class TypeChecker {
 			code = readProgram("Program.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 
 		// Class Declaration Check
-		System.out.println("\nIs class declarartion correct:"
+		System.out.println("\nis class declarartion correct:"
 				+ checkClassDeclaration(code));
 
 		// MainCount
 		System.out
 				.println("\nis there only a single main with the correct declations: "
 						+ checkMainCount(code));
+		
+		//Check Variable Declaration Names
+		System.out.println("\nis there dublicate varable names: " + checkDulicateNames(varableNames));
 		
 		//Checking boolean variables
 		System.out.println("\nChecking Boolean variables");
@@ -41,7 +46,7 @@ public class TypeChecker {
 		System.out.println("\nChecking int variables");
 		System.out.println("Do int variables have the right assignment: " + checkIntVar(mainFunction));
 		
-		//TODO more data types
+	
 		//Checking double variables
 		System.out.println("\nChecking double variables");
 		System.out.println("Do double variables have the right assignment: " + checkDoubleVar(mainFunction));
@@ -55,7 +60,7 @@ public class TypeChecker {
 		System.out.println("Do short variables have the right assignment: " + checkShortVar(mainFunction));
 		
 		//Checking byte variables
-		System.out.println("\nChecking float variables");
+		System.out.println("\nChecking byte variables");
 		System.out.println("Do byte variables have the right assignment: " + checkByteVar(mainFunction));
 		
 		//Checking byte variables
@@ -109,6 +114,26 @@ public class TypeChecker {
 			}
 			
 		}
+		
+		return noError;
+	}
+	
+	
+	private static boolean checkDulicateNames(List<String> code){
+		boolean noError = false;
+		for(int i = 0 ; i < code.size() ; i ++){
+			int indexOfname = i + 1 ;
+			for(int j = indexOfname ; j < code.size() ; j ++){
+				
+				if(code.get(i).equals(code.get(j))){
+					noError = true;
+					System.out.println(code.get(i) + "  < -- > " + code.get(j));
+				}
+			}
+			
+			
+		}
+		
 		
 		
 		return noError;
@@ -316,6 +341,15 @@ public class TypeChecker {
 				while ((mainLines = in.readLine()) != null && run == true) {
 					if (mainLines.trim().length() > 1) {
 						mainFunction.add(mainLines.trim());
+						for(String a: variableType){
+							if(mainLines.trim().startsWith(a)){
+								int indexOfType = mainLines.indexOf(a);
+								int indexOfEqual = mainLines.indexOf("=");
+								String result = mainLines.trim().substring(indexOfType + a.length(), indexOfEqual - 1);// left-side assignment
+								result = result.replace(";", "");//removes semi-colon
+								varableNames.add(result);
+							}
+						}
 					}
 					if (mainLines.contains("}")) {
 						run = false;
