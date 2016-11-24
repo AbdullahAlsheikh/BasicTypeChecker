@@ -4,7 +4,7 @@ import java.util.*;
 public class TypeChecker {
 
 	private static String[] variableType = { "boolean", "char", "int", "float",
-											"double", "short", "String", "byte"};
+											"double", "short", "String", "byte" , "long"};
 	private static List<String> mainFunction = new ArrayList<String>();
 	private static List<String> varableNames = new ArrayList<String>();
 
