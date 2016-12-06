@@ -1,0 +1,24 @@
+class Person {}
+public static void main(String args[]) {
+String x = "Hello!";
+boolean t = true;
+int y = "Yellow";
+double d = adsaf;
+char e = 'a';
+float f = 65f;
+short s = 3;
+byte b = 0;
+long l = 2;
+BigInteger big = new BigInteger("198394810938413431");
+Person p = new Person();
+int[] array = {1,2,3);
+double[] dArray = {1.0,2.0,3.0};
+String[] sArray = {"Good","Bad","Ok"};
+char[] cArray = {'a','b','c'};
+float[] fArray = {54f,33e,54c};
+short[] shortArray = {5,6,2};
+long[] longArray = {4,5,6};
+if (true) {}
+while (true) {}
+for (int i = 0; i < 2; i++) {}
+}
