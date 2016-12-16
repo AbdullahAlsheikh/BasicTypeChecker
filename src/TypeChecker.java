@@ -30,6 +30,8 @@ public class TypeChecker {
 		// Check Variable Declaration Names
 		System.out.println("\nis there dublicate varable names: "
 				+ checkDulicateNames(varableNames));
+		
+	
 
 		// Checking boolean variables
 		 System.out.println("\nChecking Boolean variables");
@@ -133,9 +135,8 @@ public class TypeChecker {
 				int indexOfEqual = firstSlot.indexOf("=");
 				firstSlot = firstSlot.substring(indexOfEqual + 1,
 						firstSlot.length());
-				System.out.println(firstSlot);
 				try{
-					int intResult = Integer.parseInt(result.trim());
+					int intResult = Integer.parseInt(firstSlot.trim());
 				}catch(Exception e){
 					noError = false;
 					System.out.println("--::Error --> " + result.trim());
@@ -259,7 +260,6 @@ public class TypeChecker {
 		List<String> array = new ArrayList<String>();
 		boolean noError = true;
 		for (String line : code) {
-			System.out.println(line);
 			if (line.startsWith("char")) {
 				if (line.contains("[]")) {
 					// For Checks Array
@@ -313,15 +313,12 @@ public class TypeChecker {
 		for (int i = 0; i < code.size(); i++) {
 			int indexOfname = i + 1;
 			for (int j = indexOfname; j < code.size(); j++) {
-
 				if (code.get(i).equals(code.get(j))) {
 					noError = true;
-					System.out.println(code.get(i) + "  < -- > " + code.get(j));
+					System.out.println(code.get(i).trim() + "  < -- > " + code.get(j).trim());
 				}
 			}
-
 		}
-
 		return noError;
 	}
 
